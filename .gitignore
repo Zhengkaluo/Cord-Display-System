@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.pytest_cache/
+data/*.db
+data/*.db-*
+data/uploads/
+logs/
+.tools/
+data/runtime-config.json

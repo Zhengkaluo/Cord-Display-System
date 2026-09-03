@@ -1,0 +1,49 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #151511;
+  color: #f3f1e8;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #aaa997;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.connection-pill {
+  border: 1px solid #5d5d50;
+  border-radius: 999px;
+  color: #c5c4b4;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  padding: 8px 11px 7px;
+}
+
+.connection-pill.is-online {
+  border-color: #7b8e5b;
+  color: #d4e4b7;
+}
+
+.connection-pill.is-offline {
+  border-color: #965f56;
+  color: #f0b4aa;
+}

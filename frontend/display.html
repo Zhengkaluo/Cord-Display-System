@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CORD Display</title>
+    <link rel="stylesheet" href="/assets/shared.css">
+    <link rel="stylesheet" href="/assets/display.css">
+  </head>
+  <body class="display-body">
+    <main class="display-stage" aria-live="polite">
+      <section class="scene music-scene is-active" data-scene="now_playing" aria-label="正在播放">
+        <div class="music-visual" data-visual-panel>
+          <div class="visual-art" data-visual-art><span>CORD</span></div>
+          <video data-visual-video muted loop playsinline></video>
+        </div>
+        <div class="music-copy">
+          <div class="scene-topline">
+            <p class="eyebrow">NOW PLAYING · CORD SOUND</p>
+            <span class="connection-pill" data-connection>CONNECTING</span>
+          </div>
+          <div class="track-copy">
+            <h1 data-track-title>—</h1>
+            <p class="artist" data-track-artist>—</p>
+            <p class="album" data-track-album>—</p>
+          </div>
+          <div class="playing-card">
+            <span>PLAYING IN CORD</span>
+            <strong data-playback-status>WAITING</strong>
+            <div class="progress-track"><i data-progress></i></div>
+            <div class="time-row"><time data-position>—:—</time><time data-duration>—:—</time></div>
+          </div>
+          <footer class="scene-footer"><span data-source>LOCAL SOURCE</span><span data-revision>REV —</span></footer>
+        </div>
+      </section>
+
+      <section class="scene notice-scene" data-scene="artist_notice" aria-label="演出提示" aria-hidden="true">
+        <div class="music-visual" data-visual-panel>
+          <div class="visual-art" data-visual-art><span>CORD</span></div>
+          <video data-visual-video muted loop playsinline></video>
+        </div>
+        <div class="notice-copy">
+          <div class="scene-topline">
+            <p class="eyebrow">NOW PLAYING · CORD SOUND</p>
+            <span class="connection-pill" data-connection>CONNECTING</span>
+          </div>
+          <div class="notice-track">
+            <h1 data-track-title>—</h1>
+            <p><strong data-track-artist>—</strong><span data-track-album>—</span></p>
+          </div>
+          <div class="notice-rule"></div>
+          <div class="event-copy">
+            <p class="eyebrow" data-notice-eyebrow>ARTIST IN TOWN</p>
+            <h2 data-notice-date>SEP 12</h2>
+            <div class="event-meta">
+              <p><span>TIME</span><strong data-notice-time>20:00</strong></p>
+              <p><span>VENUE</span><strong data-notice-venue>HOU LIVE</strong></p>
+              <p><span>CITY</span><strong data-notice-city>SHENZHEN</strong></p>
+            </div>
+          </div>
+          <footer class="scene-footer"><span data-notice-footer>UPCOMING PERFORMANCE · VERIFIED LISTING</span><span data-revision>REV —</span></footer>
+        </div>
+      </section>
+
+      <section class="scene promotion-scene" data-scene="promotion" aria-label="豆子或门店活动" aria-hidden="true">
+        <div class="music-visual promotion-visual">
+          <img class="promotion-image" data-promotion-image alt="豆子或门店活动图片">
+        </div>
+        <div class="promotion-copy">
+          <div class="brand-mark"><img src="/assets/cord-logo-light-khaki.svg" alt="CORD"></div>
+          <div class="promotion-main">
+            <p class="eyebrow" data-promotion-eyebrow>NEW BEAN · CURRENT ROTATION</p>
+            <h1 data-promotion-title>Ethiopia<br>Guji</h1>
+            <p class="promotion-details" data-promotion-details>JASMINE · BERGAMOT<br>BLACK TEA · HONEY</p>
+            <p class="promotion-callout" data-promotion-callout>Available on filter</p>
+          </div>
+          <footer class="scene-footer"><span data-promotion-footer>ASK THE BARISTA · WHILE AVAILABLE</span><span data-revision>REV —</span></footer>
+        </div>
+        <div class="promotion-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="bean bean-one"></div>
+          <div class="bean bean-two"></div>
+          <p>CORD<br>SINGLE ORIGIN</p>
+        </div>
+      </section>
+    </main>
+    <script src="/assets/display.js" defer></script>
+  </body>
+</html>
