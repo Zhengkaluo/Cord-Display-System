@@ -12,9 +12,11 @@ from typing import Any
 from .base import SourceResult
 
 
+# 项目内自包含的 Windows 采集脚本（随仓库发布，无需外部依赖）。
+# 该脚本通过 PowerShell 调用 Windows SMTC 读取全系统正在播放的媒体信息。
 DEFAULT_SOURCE_PATH = (
-    Path(__file__).resolve().parents[3]
-    / "Music-Player-Investigation"
+    Path(__file__).resolve().parent
+    / "vendor"
     / "get_music_powershell.py"
 )
 
@@ -41,18 +43,22 @@ class WindowsSMTCSource:
                 [sys.executable, str(self.source_path), "--json", "--thumbnail"],
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 timeout=self.timeout,
                 check=False,
             )
         except (OSError, subprocess.TimeoutExpired) as exc:
             return SourceResult(connection="error", message=f"Windows SMTC source failed: {exc}")
 
+        stdout = result.stdout or ""
+        stderr = result.stderr or ""
         if result.returncode != 0:
-            detail = result.stderr.strip() or "SMTC source returned an error"
+            detail = stderr.strip() or "SMTC source returned an error"
             return SourceResult(connection="error", message=detail)
 
         try:
-            payload = json.loads(result.stdout.strip() or "{}")
+            payload = json.loads(stdout.strip() or "{}")
         except json.JSONDecodeError:
             return SourceResult(connection="error", message="Windows SMTC source returned invalid JSON.")
 

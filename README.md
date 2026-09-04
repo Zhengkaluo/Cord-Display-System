@@ -4,12 +4,12 @@ CORD 门店屏幕本机一体化系统。
 
 第一版由同一台 macOS 或 Windows 电脑运行：
 
-- `/display`：三星屏幕全屏 HTML；
+- `/display`：门店屏全屏 HTML（横屏）；
 - `/admin`：独立的配置 HTML；
 - 本地服务：曲目信息、显示状态、配置和调度；
 - SQLite 与本地素材：离线可用。
 
-当前开发轮次：R3 已完成；R4 已接入 Artist in Town 自动匹配，以及豆子 / 活动的自然曲终自动插播。下一步继续补充 Windows 时间线实机验收、品牌内容和长时间模拟。
+macOS 与 Windows 真实数据源均已实机跑通。显示与配置能力正在按 [docs/DISPLAY_REQUIREMENTS.md](docs/DISPLAY_REQUIREMENTS.md)（权威需求）重构，开发批次见 [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md)。本文件中显示相关描述如与需求文档冲突，**以需求文档为准**。
 
 ## 启动
 
@@ -70,17 +70,20 @@ macOS 第一次走 AppleScript 降级读取 Apple Music 或 Spotify 时，系统
 - 上传或填写一张自定义图片；
 - 上传或填写一段静音循环视频。
 
-本机上传的素材存放在 `media/`，单个文件上限为 250 MB；图片支持 PNG/JPG/WebP/GIF/SVG，视频支持 MP4/WebM/MOV/M4V。当前选择保存在 `data/runtime-config.json`，服务重启后继续生效。该配置属于共用前端，与 macOS MediaRemote 或 Windows SMTC 数据源无关。
+本机上传的素材存放在 `media/`，单个文件上限为 250 MB；图片支持 PNG/JPG/WebP/GIF/SVG，视频支持 MP4/WebM/MOV/M4V。当前选择保存在 `data/runtime-config.json`，服务重启后继续生效。左侧素材的比例白名单与缩放规则以 [docs/DISPLAY_REQUIREMENTS.md](docs/DISPLAY_REQUIREMENTS.md) 为准（不再限定正方形裁切）。该配置属于共用前端，与 macOS MediaRemote 或 Windows SMTC 数据源无关。
 
-## 三张显示母版
+## 显示场景
 
-`/display` 目前包含三种 1920 × 1080 场景：
+`/display` 的显示场景与布局规格以 [docs/DISPLAY_REQUIREMENTS.md](docs/DISPLAY_REQUIREMENTS.md) 为准，当前规划为四场景：
 
-- 正在播放：持续显示当前曲目信息和播放进度；
-- 演出提示：保留当前曲目信息，并附加该音乐人的日期、时间、场地和城市；
-- 豆子 / 活动：显示门店新品或活动内容。
+- 正在播放（now_playing）：左侧视觉 + 右侧曲目信息；命中登记音乐人时右侧追加 Artist in Town 增量信息，命中期间常挂；左侧支持专辑封面/自定义图/视频，够长的曲子可在中段临时插播素材；
+- 门店推荐（promotion）：近全屏单图；
+- 门店活动（store_event）：近全屏单图，与门店推荐并行、曲末随机混播；
+- 门店宣传（ambient）：常驻全屏图/视频，后台手动切入切出。
 
-在 `/admin` 的“画面预览切换”中可临时切换三张母版；切换使用 750 ms 交叉淡入淡出，切回音乐场景时读取最新曲目。Artist in Town 会根据当前音乐人自动决定是否显示；豆子和活动可以在歌曲自然结束后自动插播。
+全屏场景按素材与屏幕比例智能选择 cover/contain，contain 留白由前端取色补边（相近色/对比色两套方案，详见需求文档）。
+
+> 说明：上述为规划中的目标形态，具体实现进度见 [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md)。
 
 ## 音乐人演出表和自动匹配
 
@@ -101,7 +104,7 @@ macOS 第一次走 AppleScript 降级读取 Apple Music 或 Spotify 时，系统
 
 `/admin` 的“豆子／活动内容库”允许同时维护任意多条记录。每条记录可独立设置内容类型、后台名称、展示文案、可选图片、启用状态、生效日期、优先级和单次展示秒数，数据同样保存在 `data/cord-screen.db`。
 
-图片可以直接从本机上传，也可以填写 `/media/…` 或 `https://…` 地址。记录设置图片后，显示端会像播放页的专辑封面／自定义图片一样，将图片放入左侧方形视觉区，右侧继续显示活动文字；图片按方形区域裁切，建议使用正方形素材。未设置图片时继续使用原有抽象图案母版。
+图片可以直接从本机上传，也可以填写 `/media/…` 或 `https://…` 地址。门店推荐（promotion）与门店活动（store_event）为并行两类内容，均以近全屏单图形式展示，缩放与背景填充规则以 [docs/DISPLAY_REQUIREMENTS.md](docs/DISPLAY_REQUIREMENTS.md) 为准。旧版 `runtime-config.json` 中的单条豆子 / 活动内容会在首次启动新版时迁移为内容库的第一条记录；迁移只执行一次，之后删除记录不会被旧配置重新生成。
 
 内容可逐条新增、编辑、启用 / 停用、预览和删除。旧版 `runtime-config.json` 中的单条豆子 / 活动内容会在首次启动新版时迁移为内容库的第一条记录；迁移只执行一次，之后删除记录不会被旧配置重新生成。
 
@@ -125,8 +128,8 @@ macOS 第一次走 AppleScript 降级读取 Apple Music 或 Spotify 时，系统
 - 默认使用 mock 曲目状态；双平台真实数据适配层已经建立；
 - admin 修改曲目或播放状态后，通过 SSE 实时推送到 display；
 - 服务无外网也可以运行；
-- 已完成 macOS Apple Music、QQ音乐真实抓取验收，Windows 与网易云仍待对应实机验收；
-- 已完成三张正式母版、后台手动预览、内容保存和图片 / 视频 / 专辑封面兼容；
+- 已完成 macOS Apple Music、QQ音乐真实抓取验收；Windows SMTC 已实机跑通，网易云仍待实机验收；
+- 已完成当前的显示场景骨架、后台手动预览、内容保存和图片 / 视频 / 专辑封面兼容（四场景重构按需求文档进行中）；
 - 已完成 SQLite 音乐人演出表及 Artist in Town 自动匹配；
 - 已完成 SQLite 豆子 / 活动多记录内容库及逐条预览；
 - 已完成自然曲终识别、豆子 / 活动自动轮换、定时回切、最小间隔和小时占比限制；

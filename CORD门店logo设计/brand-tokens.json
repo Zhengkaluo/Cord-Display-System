@@ -1,0 +1,18 @@
+{
+  "brand": "CORD",
+  "status": "final-approved",
+  "approved_on": "2026-08-18",
+  "last_revised_on": "2026-08-19",
+  "logo": {
+    "name": "CORD abstract wordmark",
+    "source": "Cord-2(2).pdf, pages 1-5",
+    "primary_asset": "CORD_最终Logo.svg"
+  },
+  "colors": {
+    "cord-brick-red": "#B03D25",
+    "cord-light-khaki": "#D9C486",
+    "cord-artwork-black": "#040000",
+    "cord-honey-accent": "#E3AC14",
+    "cord-cream-background": "#F3ECDC"
+  }
+}
