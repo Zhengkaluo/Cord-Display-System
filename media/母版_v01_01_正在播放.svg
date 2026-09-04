@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="CORD 当前正在播放横屏母版">
+  <defs>
+    <linearGradient id="np1-art" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D9C486"/>
+      <stop offset="0.48" stop-color="#8E5D46"/>
+      <stop offset="1" stop-color="#201512"/>
+    </linearGradient>
+    <filter id="np1-grain" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="2" seed="19" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .075 0" result="grain"/>
+      <feBlend in="SourceGraphic" in2="grain" mode="soft-light"/>
+    </filter>
+    <clipPath id="np1-cover"><rect x="112" y="148" width="752" height="752"/></clipPath>
+  </defs>
+
+  <rect width="1920" height="1080" fill="#171210"/>
+
+  <g clip-path="url(#np1-cover)" filter="url(#np1-grain)">
+    <rect x="112" y="148" width="752" height="752" fill="url(#np1-art)"/>
+    <circle cx="232" cy="758" r="292" fill="#B03D25" opacity="0.92"/>
+    <rect x="490" y="92" width="236" height="510" fill="#040000" opacity="0.88" transform="rotate(14 608 347)"/>
+    <rect x="582" y="184" width="72" height="370" fill="#E3AC14" opacity="0.78" transform="rotate(-8 618 369)"/>
+    <circle cx="261" cy="310" r="82" fill="#F3ECDC" opacity="0.92"/>
+    <rect x="508" y="744" width="238" height="52" fill="#E3AC14" opacity="0.88"/>
+    <path d="M135 245C310 315 422 232 540 157" fill="none" stroke="#F3ECDC" stroke-width="5" opacity="0.27"/>
+  </g>
+
+  <text x="112" y="946" fill="#D9C486" font-family="Helvetica Neue,Arial,sans-serif" font-size="20" letter-spacing="5">CORD PLAYBACK / 001</text>
+
+  <g font-family="Helvetica Neue,Arial,sans-serif">
+    <text x="1018" y="228" fill="#B03D25" font-size="22" font-weight="500" letter-spacing="7">NOW PLAYING · CORD SOUND</text>
+    <text x="1010" y="432" fill="#F3ECDC" font-size="128" font-weight="500" letter-spacing="-7">Compass</text>
+    <text x="1018" y="517" fill="#F3ECDC" font-size="48" font-weight="400">The Neighbourhood</text>
+    <text x="1018" y="567" fill="#D9C486" font-size="24" letter-spacing="2">WIPED OUT! · 2015</text>
+
+    <rect x="1018" y="702" width="4" height="142" fill="#B03D25"/>
+    <text x="1050" y="735" fill="#D9C486" font-size="19" letter-spacing="5">PLAYING IN CORD</text>
+    <text x="1050" y="790" fill="#F3ECDC" font-size="34">A sound selected for the room.</text>
+    <text x="1050" y="830" fill="#8E7E72" font-size="20" letter-spacing="2">SHENZHEN · CURRENT SESSION</text>
+  </g>
+
+  <line x1="1018" y1="928" x2="1808" y2="928" stroke="#F3ECDC" stroke-opacity="0.18"/>
+  <text x="1018" y="970" fill="#8E7E72" font-family="Helvetica Neue,Arial,sans-serif" font-size="17" letter-spacing="4">LIVE MUSIC METADATA</text>
+
+  <svg x="1656" y="72" width="152" height="69" viewBox="303 140 170 77" aria-label="CORD logo">
+    <g fill="#D9C486">
+      <path d="M319.992188 152.328125C326.289062 146.324219 333.746094 142.492188 342.378906 141.027344C344.800781 140.617188 349.183594 139.871094 351.3125 141.183594C353.992188 142.832031 352.65625 146.375 350.925781 148.238281C347.496094 151.933594 341.726562 152.851562 338.265625 156.90625C331.765625 164.511719 332.832031 181.824219 342.253906 186.667969C351.660156 191.503906 382.984375 183.777344 382.984375 199.992188C382.984375 214.261719 357.667969 212.21875 348.128906 211.152344C339.773438 210.21875 329.964844 209.082031 321.910156 206.867188C295.210938 199.523438 305.097656 166.527344 319.992188 152.328125Z"/>
+      <path d="M461.058594 145.582031C466.597656 145.148438 468.054688 149.875 469.105469 154.324219C471.765625 165.601562 471.894531 185.753906 469.269531 197.019531C465.941406 211.300781 456.066406 212.691406 442.890625 211.636719C426.4375 210.3125 417.035156 200.789062 420.691406 183.722656C423.710938 169.628906 436.789062 172.933594 447.613281 171.738281C455.816406 170.832031 455.816406 166.597656 455.652344 159.410156C455.542969 154.5 453.925781 146.140625 461.058594 145.582031Z"/>
+      <path d="M379.265625 178.222656C372.757812 185.804688 360.527344 186.71875 351.796875 182.941406C334.25 175.355469 342.246094 157.253906 357.265625 152.816406C362.84375 151.167969 371.304688 151.273438 376.613281 153.773438C386.046875 158.214844 385.25 171.246094 379.265625 178.222656Z"/>
+      <path d="M426.472656 164.328125C421.328125 165.191406 412.949219 162.214844 408.671875 163.402344C408.265625 163.617188 408.074219 163.949219 407.976562 164.417969C407.714844 165.769531 408.210938 168.558594 408.621094 170.496094C408.910156 171.84375 409.222656 172.996094 409.59375 174.34375C411.957031 182.867188 414.894531 193.523438 415.988281 201.289062C416.894531 205.363281 415.339844 210.558594 410.730469 211.351562C403.355469 212.328125 390.640625 213.140625 389.058594 203.589844C387.863281 196.929688 388.546875 150.734375 398.160156 152.769531C400.1875 152.824219 401.628906 154.988281 403.53125 155.050781C404.800781 155.117188 406.035156 154.566406 407.238281 154.191406C411.398438 152.765625 416.054688 152.429688 420.28125 152.445312C422.878906 152.484375 425.738281 152.5625 427.929688 154.160156C431.878906 157.109375 431.496094 163.777344 426.710938 164.289062Z"/>
+    </g>
+  </svg>
+</svg>

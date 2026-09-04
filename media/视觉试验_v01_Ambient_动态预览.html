@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CORD Ambient 动态预览</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background: #0d0a09;
+      color: #f3ecdc;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(217, 196, 134, 0.08), transparent 42%),
+        #0d0a09;
+    }
+
+    main {
+      width: min(96vw, calc(88vh * 16 / 9));
+      display: grid;
+      gap: 14px;
+    }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #171210 url("./母版_v01_01_正在播放.png") center / cover no-repeat;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.46);
+      isolation: isolate;
+    }
+
+    .ambient-window {
+      position: absolute;
+      left: 5.833333%;
+      top: 13.703704%;
+      width: 35.833333%;
+      height: 69.62963%;
+      overflow: hidden;
+      background: #d9c5a2;
+    }
+
+    .ambient-window svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .layer {
+      transform-box: fill-box;
+      transform-origin: center;
+      will-change: transform, opacity;
+    }
+
+    .field-left {
+      animation: drift-left 12s ease-in-out infinite;
+    }
+
+    .field-right {
+      animation: drift-right 12s ease-in-out infinite;
+    }
+
+    .dune {
+      animation: dune-breathe 12s ease-in-out infinite;
+    }
+
+    .sun {
+      animation: sun-breathe 12s ease-in-out infinite;
+    }
+
+    .mustard {
+      animation: mustard-drift 12s ease-in-out infinite;
+    }
+
+    .foreground {
+      animation: foreground-drift 12s ease-in-out infinite;
+    }
+
+    .air-line {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: air-current 12s ease-in-out infinite;
+    }
+
+    .grain {
+      mix-blend-mode: soft-light;
+      animation: grain-breathe 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes drift-left {
+      0%, 100% { transform: translate3d(-0.8%, 0.3%, 0) scale(1.015); }
+      50% { transform: translate3d(0.8%, -0.4%, 0) scale(1.025); }
+    }
+
+    @keyframes drift-right {
+      0%, 100% { transform: translate3d(0.6%, -0.2%, 0) scale(1.02); }
+      50% { transform: translate3d(-0.8%, 0.5%, 0) scale(1.01); }
+    }
+
+    @keyframes dune-breathe {
+      0%, 100% { transform: translate3d(-0.4%, 0.5%, 0) scale(1.015); }
+      50% { transform: translate3d(0.5%, -0.2%, 0) scale(1.025); }
+    }
+
+    @keyframes sun-breathe {
+      0%, 100% { transform: translate3d(0, 0.3%, 0) scale(0.985); }
+      50% { transform: translate3d(-0.5%, -0.4%, 0) scale(1.018); }
+    }
+
+    @keyframes mustard-drift {
+      0%, 100% { transform: translate3d(0.8%, 0, 0); }
+      50% { transform: translate3d(-1%, -0.35%, 0); }
+    }
+
+    @keyframes foreground-drift {
+      0%, 100% { transform: translate3d(0.7%, 0.4%, 0) scale(1.02); }
+      50% { transform: translate3d(-0.4%, -0.2%, 0) scale(1.028); }
+    }
+
+    @keyframes air-current {
+      0%, 100% { transform: translate3d(-1.1%, 0.7%, 0); opacity: 0.55; }
+      50% { transform: translate3d(1.1%, -0.7%, 0); opacity: 0.82; }
+    }
+
+    @keyframes grain-breathe {
+      0%, 100% { opacity: 0.16; }
+      50% { opacity: 0.22; }
+    }
+
+    .paused .ambient-window * {
+      animation-play-state: paused !important;
+    }
+
+    .toolbar {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: #9e9187;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .meta {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex: none;
+    }
+
+    button {
+      min-width: 84px;
+      border: 1px solid rgba(217, 196, 134, 0.28);
+      border-radius: 999px;
+      padding: 9px 14px;
+      background: rgba(243, 236, 220, 0.04);
+      color: #d9c486;
+      font: inherit;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+    }
+
+    button:hover,
+    button:focus-visible {
+      background: rgba(217, 196, 134, 0.1);
+      outline: none;
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 12px; }
+      main { width: 100%; }
+      .toolbar { align-items: flex-start; }
+      .meta { white-space: normal; line-height: 1.5; }
+      button { min-width: auto; padding-inline: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ambient-window * { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="stage" id="stage" aria-label="CORD Ambient 正在播放动态预览">
+      <div class="ambient-window" aria-hidden="true">
+        <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" role="img">
+          <defs>
+            <linearGradient id="warm-air" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#f3ecdc"/>
+              <stop offset="0.56" stop-color="#e7d8b9"/>
+              <stop offset="1" stop-color="#cdb48d"/>
+            </linearGradient>
+            <linearGradient id="right-air" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#d9c486" stop-opacity="0.62"/>
+              <stop offset="1" stop-color="#8e5d46" stop-opacity="0.32"/>
+            </linearGradient>
+            <radialGradient id="sun-tone" cx="42%" cy="35%" r="72%">
+              <stop offset="0" stop-color="#c95438"/>
+              <stop offset="1" stop-color="#b03d25"/>
+            </radialGradient>
+            <filter id="soft-shadow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#5c382b" flood-opacity="0.12"/>
+            </filter>
+            <filter id="paper-grain" x="-10%" y="-10%" width="120%" height="120%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.58" numOctaves="2" seed="23" stitchTiles="stitch" result="noise"/>
+              <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+              <feComponentTransfer in="mono" result="faded">
+                <feFuncA type="table" tableValues="0 0.28"/>
+              </feComponentTransfer>
+              <feBlend in="SourceGraphic" in2="faded" mode="soft-light"/>
+            </filter>
+          </defs>
+
+          <rect width="1000" height="1000" fill="url(#warm-air)"/>
+
+          <g class="layer field-left">
+            <circle cx="96" cy="315" r="306" fill="#f7f0e2" fill-opacity="0.92"/>
+          </g>
+
+          <g class="layer field-right">
+            <path d="M640,-80 C610,116 594,292 598,496 C600,625 632,734 704,848 L1080,848 L1080,-80 Z" fill="url(#right-air)"/>
+          </g>
+
+          <g class="layer dune" filter="url(#soft-shadow)">
+            <path d="M-110,454 C122,445 342,467 527,534 C652,579 760,655 862,790 L862,1080 L-110,1080 Z" fill="#d8bf95"/>
+          </g>
+
+          <g class="layer mustard">
+            <rect x="786" y="758" width="300" height="134" fill="#d9b34d" fill-opacity="0.8"/>
+          </g>
+
+          <g class="layer sun" filter="url(#soft-shadow)">
+            <circle cx="706" cy="722" r="158" fill="url(#sun-tone)"/>
+          </g>
+
+          <g class="layer foreground">
+            <path d="M542,1080 C590,901 737,843 1080,856 L1080,1080 Z" fill="#201512"/>
+          </g>
+
+          <path class="air-line" d="M-96,704 C220,500 502,364 1092,172" fill="none" stroke="#fff8eb" stroke-width="3.2" stroke-linecap="round"/>
+          <rect class="grain" width="1000" height="1000" fill="#d9c486" filter="url(#paper-grain)"/>
+        </svg>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <div class="meta">Ambient / Neo-Classical · 平静 · 8–11 · 12s seamless loop</div>
+      <div class="actions">
+        <button type="button" id="toggleButton" aria-pressed="false">暂停</button>
+        <button type="button" id="restartButton">重播</button>
+        <button type="button" id="fullscreenButton">全屏</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const stage = document.getElementById("stage");
+    const toggleButton = document.getElementById("toggleButton");
+    const restartButton = document.getElementById("restartButton");
+    const fullscreenButton = document.getElementById("fullscreenButton");
+
+    toggleButton.addEventListener("click", () => {
+      const paused = stage.classList.toggle("paused");
+      toggleButton.textContent = paused ? "继续" : "暂停";
+      toggleButton.setAttribute("aria-pressed", String(paused));
+    });
+
+    restartButton.addEventListener("click", () => {
+      const replacement = stage.querySelector(".ambient-window").cloneNode(true);
+      stage.querySelector(".ambient-window").replaceWith(replacement);
+      stage.classList.remove("paused");
+      toggleButton.textContent = "暂停";
+      toggleButton.setAttribute("aria-pressed", "false");
+    });
+
+    fullscreenButton.addEventListener("click", async () => {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else {
+        await stage.requestFullscreen();
+      }
+    });
+  </script>
+</body>
+</html>

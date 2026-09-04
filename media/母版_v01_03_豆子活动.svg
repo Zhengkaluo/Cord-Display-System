@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="CORD 豆子与活动横屏母版">
+  <defs>
+    <linearGradient id="bean-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D9C486"/>
+      <stop offset="0.44" stop-color="#8A5636"/>
+      <stop offset="1" stop-color="#21120D"/>
+    </linearGradient>
+    <radialGradient id="coffee" cx="44%" cy="38%" r="65%">
+      <stop offset="0" stop-color="#8F5D36"/>
+      <stop offset="0.46" stop-color="#3A2117"/>
+      <stop offset="1" stop-color="#130B08"/>
+    </radialGradient>
+    <filter id="bean-grain" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.62" numOctaves="3" seed="31" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 .085 0" result="grain"/>
+      <feBlend in="SourceGraphic" in2="grain" mode="soft-light"/>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="#F3ECDC"/>
+  <rect width="770" height="1080" fill="#B03D25"/>
+
+  <g font-family="Helvetica Neue,Arial,sans-serif">
+    <text x="112" y="174" fill="#E3AC14" font-size="21" font-weight="500" letter-spacing="7">NEW BEAN · CURRENT ROTATION</text>
+    <text x="104" y="402" fill="#F3ECDC" font-size="116" font-weight="500" letter-spacing="-6">Ethiopia</text>
+    <text x="104" y="520" fill="#F3ECDC" font-size="116" font-weight="500" letter-spacing="-6">Guji</text>
+    <line x1="112" y1="618" x2="620" y2="618" stroke="#F3ECDC" stroke-opacity="0.42"/>
+    <text x="112" y="683" fill="#D9C486" font-size="25" letter-spacing="4">JASMINE · BERGAMOT</text>
+    <text x="112" y="726" fill="#D9C486" font-size="25" letter-spacing="4">BLACK TEA · HONEY</text>
+    <text x="112" y="858" fill="#F3ECDC" font-size="25">Available on filter</text>
+    <text x="112" y="902" fill="#D9C486" font-size="18" letter-spacing="3">ASK THE BARISTA · WHILE AVAILABLE</text>
+  </g>
+
+  <g filter="url(#bean-grain)">
+    <rect x="770" width="1150" height="1080" fill="url(#bean-bg)"/>
+    <ellipse cx="1390" cy="560" rx="340" ry="342" fill="#D9C486" opacity="0.92"/>
+    <ellipse cx="1390" cy="560" rx="292" ry="294" fill="url(#coffee)"/>
+    <ellipse cx="1390" cy="560" rx="207" ry="205" fill="none" stroke="#D9C486" stroke-opacity="0.2" stroke-width="12"/>
+    <ellipse cx="1390" cy="560" rx="122" ry="120" fill="none" stroke="#E3AC14" stroke-opacity="0.16" stroke-width="7"/>
+
+    <g fill="#4A281A">
+      <ellipse cx="955" cy="235" rx="58" ry="92" transform="rotate(-34 955 235)"/>
+      <path d="M916 266C946 232 965 208 989 178" fill="none" stroke="#D9C486" stroke-opacity="0.38" stroke-width="6"/>
+      <ellipse cx="1720" cy="240" rx="52" ry="84" transform="rotate(28 1720 240)"/>
+      <path d="M1697 204C1720 232 1738 255 1750 286" fill="none" stroke="#D9C486" stroke-opacity="0.38" stroke-width="6"/>
+      <ellipse cx="968" cy="854" rx="54" ry="87" transform="rotate(31 968 854)"/>
+      <path d="M941 818C966 849 982 874 993 905" fill="none" stroke="#D9C486" stroke-opacity="0.38" stroke-width="6"/>
+      <ellipse cx="1730" cy="838" rx="56" ry="90" transform="rotate(-28 1730 838)"/>
+      <path d="M1699 883C1727 851 1744 824 1760 790" fill="none" stroke="#D9C486" stroke-opacity="0.38" stroke-width="6"/>
+    </g>
+    <rect x="800" y="0" width="6" height="1080" fill="#E3AC14" opacity="0.72"/>
+  </g>
+
+  <text x="1640" y="992" fill="#F3ECDC" font-family="Helvetica Neue,Arial,sans-serif" font-size="18" letter-spacing="4">CORD COFFEE</text>
+
+  <svg x="112" y="66" width="132" height="60" viewBox="303 140 170 77" aria-label="CORD logo">
+    <g fill="#F3ECDC">
+      <path d="M319.992188 152.328125C326.289062 146.324219 333.746094 142.492188 342.378906 141.027344C344.800781 140.617188 349.183594 139.871094 351.3125 141.183594C353.992188 142.832031 352.65625 146.375 350.925781 148.238281C347.496094 151.933594 341.726562 152.851562 338.265625 156.90625C331.765625 164.511719 332.832031 181.824219 342.253906 186.667969C351.660156 191.503906 382.984375 183.777344 382.984375 199.992188C382.984375 214.261719 357.667969 212.21875 348.128906 211.152344C339.773438 210.21875 329.964844 209.082031 321.910156 206.867188C295.210938 199.523438 305.097656 166.527344 319.992188 152.328125Z"/>
+      <path d="M461.058594 145.582031C466.597656 145.148438 468.054688 149.875 469.105469 154.324219C471.765625 165.601562 471.894531 185.753906 469.269531 197.019531C465.941406 211.300781 456.066406 212.691406 442.890625 211.636719C426.4375 210.3125 417.035156 200.789062 420.691406 183.722656C423.710938 169.628906 436.789062 172.933594 447.613281 171.738281C455.816406 170.832031 455.816406 166.597656 455.652344 159.410156C455.542969 154.5 453.925781 146.140625 461.058594 145.582031Z"/>
+      <path d="M379.265625 178.222656C372.757812 185.804688 360.527344 186.71875 351.796875 182.941406C334.25 175.355469 342.246094 157.253906 357.265625 152.816406C362.84375 151.167969 371.304688 151.273438 376.613281 153.773438C386.046875 158.214844 385.25 171.246094 379.265625 178.222656Z"/>
+      <path d="M426.472656 164.328125C421.328125 165.191406 412.949219 162.214844 408.671875 163.402344C408.265625 163.617188 408.074219 163.949219 407.976562 164.417969C407.714844 165.769531 408.210938 168.558594 408.621094 170.496094C408.910156 171.84375 409.222656 172.996094 409.59375 174.34375C411.957031 182.867188 414.894531 193.523438 415.988281 201.289062C416.894531 205.363281 415.339844 210.558594 410.730469 211.351562C403.355469 212.328125 390.640625 213.140625 389.058594 203.589844C387.863281 196.929688 388.546875 150.734375 398.160156 152.769531C400.1875 152.824219 401.628906 154.988281 403.53125 155.050781C404.800781 155.117188 406.035156 154.566406 407.238281 154.191406C411.398438 152.765625 416.054688 152.429688 420.28125 152.445312C422.878906 152.484375 425.738281 152.5625 427.929688 154.160156C431.878906 157.109375 431.496094 163.777344 426.710938 164.289062Z"/>
+    </g>
+  </svg>
+</svg>
